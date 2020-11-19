@@ -34,6 +34,7 @@
 
     var daSchool = L.marker([35.714045, -79.176511]);
 
+
     var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	    maxZoom: 19,
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -54,9 +55,24 @@
     var daVectors = {
       "Historic Courthouse": daMarker,
       "S & T's Soda Shop": daShop,
-      "Horton Middle School": daSchool
+      "Horton Middle School": daSchool,
     }
     L.control.layers(daTiles, daVectors).addTo(map);
+
+    var MuseumIcon = L.icon({
+      iconUrl: 'https://i.pinimg.com/originals/5a/88/cb/5a88cbe5701628484e031255f4c1e758.png',
+      iconSize: [50,50],
+      popupAnchor: [0,0]
+    });
+    
+    var customPopup = "Pittsboro Historic Courthouse"
+
+    L.geoJSON(museum, {
+      pointToLayer: function (feature, latlng) {
+      return L.marker(latlng, {icon: MuseumIcon});}})
+      .bindPopup(customPopup)
+      .addTo(map);
+
   </script>
 </body>
 </html>
